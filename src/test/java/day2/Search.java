@@ -1,6 +1,10 @@
 package day2;
 
+
 import java.util.List;
+
+import java.util.*;
+
 
 public class Search {
 
@@ -30,5 +34,8 @@ public class Search {
                 ", total=" + total +
                 '}';
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 }

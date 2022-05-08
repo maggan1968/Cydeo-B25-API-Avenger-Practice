@@ -1,5 +1,6 @@
 package day2;
 
+
 import io.restassured.*;
 import io.restassured.http.*;
 import io.restassured.path.json.*;
