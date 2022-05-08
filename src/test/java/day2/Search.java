@@ -34,8 +34,8 @@ public class Search {
                 ", total=" + total +
                 '}';
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
+
+
+
 }
