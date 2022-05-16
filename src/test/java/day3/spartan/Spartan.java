@@ -1,0 +1,133 @@
+package day3.spartan;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Spartan {
+
+
+
+        @BeforeEach
+        public void init() {
+            RestAssured.baseURI = "http://44.201.135.133:8000";
+        }
+
+        @Test
+        public void test10() {
+
+            String newSpartan = "{\n" +
+                    "  \"gender\": \"Male\",\n" +
+                    "  \"name\": \"Mike\",\n" +
+                    "  \"phone\": 2589631478\n" +
+                    "}";
+
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .body(newSpartan)
+                    .when()
+                    .post("/api/spartans");
+
+            response.prettyPrint();
+
+        }
+
+        @Test
+        public void test11() {
+            Map<String, Object> newSpartan = new HashMap<>();
+            newSpartan.put("gender", "Male");
+            newSpartan.put("name", "John");
+            newSpartan.put("phone", 7896541235l);
+
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .body(newSpartan)
+                    .when()
+                    .post("/api/spartans");
+
+            response.prettyPrint();
+
+        }
+
+        @Test
+        public void test12() {
+
+            AddSpartan newSpartan = new AddSpartan();
+            newSpartan.setGender("Female");
+            newSpartan.setName("Jessica");
+            newSpartan.setPhone(4567891235l);
+
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .body(newSpartan)
+                    .when()
+                    .post("/api/spartans");
+
+            response.prettyPrint();
+        }
+
+        @Test
+        public void test13() {
+            AddSpartan putSpartan = new AddSpartan();
+            putSpartan.setGender("Male");
+            putSpartan.setName("Ahmet");
+            putSpartan.setPhone(4567891234l);
+
+
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .body(putSpartan)
+                    .when()
+                    .pathParams("id", 115)
+                    .and()
+                    .put("/api/spartans/{id}");
+
+            System.out.println(response.statusCode());
+            response.prettyPrint();
+        }
+
+        @Test
+        public void test14() {
+            AddSpartan patchSpartan = new AddSpartan();
+            patchSpartan.setGender("Male");
+            patchSpartan.setName("Ahmet");
+            patchSpartan.setPhone(4567891212l);
+
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .body(patchSpartan)
+                    .when()
+                    .pathParams("id", 115)
+                    .and()
+                    .patch("/api/spartans/{id}");
+
+            System.out.println(response.statusCode());
+            response.prettyPrint();
+        }
+
+        @Test
+        public void tes15() {
+            Response response = RestAssured.given().accept(ContentType.JSON).log().all()
+                    .and()
+                    .contentType(ContentType.JSON)
+                    .when()
+                    .pathParams("id", 115)
+                    .and()
+                    .delete("/api/spartans/{id}");
+
+            System.out.println(response.statusCode());
+            response.prettyPrint();
+        }
+    }
+
+
